@@ -25,6 +25,21 @@ td.top, td.bottom
     font-size: 2px;
 }
 
-td.content{
-/*    background-color: black;*/
+/* Editor UI */
+
+button, select{
+    font-size: 20px;
 }
+
+.pale{
+    color: #bbb;
+}
+
+.mt-1{margin-top: 5px;}
+.mt-2{margin-top: 10px;}
+.mb-1{margin-bottom: 5px;}
+.mb-2{margin-bottom: 10px;}
+.mr-1{margin-right: 5px;}
+.mr-2{margin-right: 10px;}
+.ml-1{margin-left: 5px;}
+.ml-2{margin-left: 10px;}

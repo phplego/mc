@@ -60,8 +60,17 @@
                 });
             });
 
-
             $("select#skins").change();
+
+
+            $(window).keydown(function (e) {
+                // Ctrl-Enter pressed
+                if (e.ctrlKey && e.keyCode === 13) {
+                    $('#btn-apply').click();
+                }
+            });
+
+
         });
 
     </script>
@@ -73,8 +82,8 @@
 <body style="display: flex">
 
 <div class="skin-container" style="flex-grow: 0; margin: 20px">
-    <div class="skin-title">Midnight Commander Skin editor</div>
-    <div class="skin-description"><i>see what you are doing!</i></div>
+    <div class="skin-title">Midnight Commander Skin Editor</div>
+    <div class="skin-description"><i>&nbsp;</i></div>
 
     <div class="tab-container" id="tab-container-skin">
         <ul>
@@ -95,8 +104,9 @@
 </div>
 
 <div style="flex-grow: 1">
-    <h3>Skin</h3>
-    <select id="skins">
+    <br>
+    <div class="mb-2">Skin</div>
+    <select id="skins" class="mb-2">
         <option>dark.ini</option>
         <option>darkfar.ini</option>
         <option>default.ini</option>
@@ -129,8 +139,10 @@
         <option>yadt256.ini</option>
     </select>
     <textarea rows="40" id="ini" style="width: 100%"></textarea>
-    <button id="btn-apply">Apply</button>
+    <button id="btn-apply">Apply</button> <span class="pale">(Ctrl + Enter)</span>
 </div>
 
+<a href="https://github.com/phplego/mc"  style="position:absolute;top:0;right:0;">
+    <img src="forkme.svg" alt="Fork me on GitHub"></a>
 </body>
 </html>
