@@ -20,7 +20,7 @@
 .ui-tabs-nav {
     list-style: none;
     margin: 0;
-    padding: 0 0 0 4px;
+    padding: 0 0 0 10px;
 }
 .ui-tabs-nav:after { /* clearing without presentational markup, IE gets extra treatment */
     display: block;
@@ -54,6 +54,8 @@
     z-index: 2;
     margin-top: 0;
     color: #000;
+    background-color: rgba(73, 174, 247, 0.15);
+    border-bottom: 2px solid rgba(73, 174, 247, 1);
 }
 .ui-tabs-nav a span {
     width: 64px; /* IE 6 treats width as min-width */
@@ -95,7 +97,7 @@
 }
 .ui-tabs-panel {
     border-top: 1px solid #97a5b0;
-    padding: 1em 8px;
+    padding: 1em 11px;
     background: #fff; /* declare background color for container to avoid distorted fonts in IE while fading */
 }
 .ui-tabs-loading em {
