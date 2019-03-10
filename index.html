@@ -22,12 +22,6 @@
 
     <script type="text/javascript">
 
-        const config = new GeneratorConfig();
-        config.debug = true;
-
-        const generator = new CssGenerator(config);
-
-
         $(function () {
             $('.tab-container > ul').tabs();
 
@@ -50,6 +44,7 @@
 
 
                 // generate css
+                const generator = new CssGenerator(new GeneratorConfig);
                 const css = generator.generate(parsedIni);
                 $('#generated-style').html(css);
 
@@ -98,7 +93,10 @@
             <li><a href="#fragment-skin-5"><span>Viewer</span></a></li>
             <li><a href="#fragment-skin-6"><span>Diff viewer</span></a></li>
         </ul>
-        <div class="skin-view-container" id="fragment-skin-1"></div>
+        <div class="skin-view-container" id="fragment-skin-1">
+            <!-- dummy element, to take width -->
+            <pre class="skin"><script>document.write((' '.repeat(100) + '\n').repeat(30))</script></pre>
+        </div>
         <div class="skin-view-container" id="fragment-skin-2"></div>
         <div class="skin-view-container" id="fragment-skin-3"></div>
         <div class="skin-view-container" id="fragment-skin-4"></div>

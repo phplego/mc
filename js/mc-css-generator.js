@@ -5,6 +5,9 @@ class GeneratorConfig
     }
 }
 
+/**
+ * The entity represents one MC's style record. For example 'color49;black;italic'
+ */
 class McStyleEntry{
 
     constructor(){
@@ -16,9 +19,10 @@ class McStyleEntry{
     }
 
     /**
+     * Create an instance from string
      *
      * @param value string like "rgb400;rgb452;italic" or ";;underline" or "color123"
-     * @return McStyleEntry
+     * @return {McStyleEntry}
      */
     static createFromString(value)
     {
@@ -57,11 +61,16 @@ class CssGenerator
     /**
      * @param {GeneratorConfig} config The configuration
      */
-    constructor(config){
+    constructor(config)
+    {
+        /**
+         * @type {GeneratorConfig}
+         */
         this.config = config;
     }
 
-    generate(parsedIni){
+    generate(parsedIni)
+    {
         const skipSections = ['skin', 'Lines', 'widget-common', 'widget-panel', 'widget-scollbar', 'widget-editor'];
         let resultCss = '';
 
@@ -80,7 +89,7 @@ class CssGenerator
                 const value = section[key];
                 const entry = McStyleEntry.createFromString(value);
                 this.processAliases(entry, parsedIni);
-                resultCss += this.createCss(sectionName, key, entry);
+                resultCss += this.renderCssSelector(sectionName, key, entry);
                 resultCss += "\n\n";
             }
         }
@@ -90,7 +99,7 @@ class CssGenerator
         cssHeader += 'pre.skin {' + "\n";
         const entry = McStyleEntry.createFromString(parsedIni['core']['_default_']);
         this.processAliases(entry, parsedIni);
-        cssHeader += this.createAttributes(entry);
+        cssHeader += this.renderSelectorProperties(entry);
         cssHeader += '}' + "\n";
 
         return cssHeader + resultCss;
@@ -99,8 +108,8 @@ class CssGenerator
     /**
      * Converts color aliases to real color values
      *
-     * @param entry McStyleEntry
-     * @param parsedIni
+     * @param {McStyleEntry} entry
+     * @param {Object} parsedIni
      */
     processAliases(entry, parsedIni)
     {
@@ -121,11 +130,12 @@ class CssGenerator
     }
 
     /**
+     * Render css properties for given entry
      *
-     * @param entry
+     * @param {McStyleEntry} entry
      * @return {string}
      */
-    createAttributes(entry)
+    renderSelectorProperties(entry)
     {
         let css = '';
         if(entry.color){
@@ -147,18 +157,19 @@ class CssGenerator
     }
 
     /**
+     * Renders one css selector with properties
      *
-     * @param sectionName
-     * @param key
-     * @param entry McStyleEntry
-     * @return string
+     * @param {string} sectionName
+     * @param {string}key
+     * @param {McStyleEntry} entry
+     * @return {string}
      */
-    createCss(sectionName, key, entry)
+    renderCssSelector(sectionName, key, entry)
     {
         let css = '';
-        css += 'td pre.skin .' + sectionName + '_' + key + '{' + "\n";
-        css += this.createAttributes(entry);
-        css += '}' + "\n";
+        css += `td pre.skin .${sectionName}_${key} {\n`;
+        css += this.renderSelectorProperties(entry);
+        css += '}\n';
         return css;
     }
 
