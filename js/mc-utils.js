@@ -35,4 +35,29 @@ class McUtils {
         });
         return value;
     }
+
+
+    /**
+     * convert colors from rgbXXX, grayXX and dictionary color names to web #XXXXXX format
+     * @param mcColor
+     * @return {*}
+     */
+    static parseMcColor(mcColor)
+    {
+        if(mcColor in McConst.colors)
+            return McConst.colors[mcColor];
+
+        if(mcColor.toLowerCase().startsWith('rgb')){
+            // $r = str_pad(dechex(round(255 * $key{3} / 5)), 2, STR_PAD_LEFT);
+            const r = Math.round(255 * mcColor[3] / 5).toString(16).padStart(2, '0');
+            const g = Math.round(255 * mcColor[4] / 5).toString(16).padStart(2, '0');
+            const b = Math.round(255 * mcColor[5] / 5).toString(16).padStart(2, '0');
+            return '#' + r + g + b;
+        }
+
+        if(mcColor.toLowerCase().startsWith('gray')){
+            const number = mcColor.substring(4);
+            return McConst.colors['color' + (232 + parseInt(number))];
+        }
+    }
 }
