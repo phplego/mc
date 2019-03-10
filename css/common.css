@@ -1,0 +1,30 @@
+div.skin-view-container pre
+{
+    font-size: 14px;
+}
+
+table.terminal {
+    border: 0;
+}
+
+span.linux_colors, table.terminal td
+{
+    color: #BABABA;
+    background-color: #000000;
+}
+
+td.left, td.right
+{
+    width: 2px;
+}
+
+
+td.top, td.bottom
+{
+    height: 2px;
+    font-size: 2px;
+}
+
+td.content{
+/*    background-color: black;*/
+}

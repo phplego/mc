@@ -1,1 +1,136 @@
-hello
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Style-Type" content="text/css">
+    <meta http-equiv="Content-Script-Type" content="text/javascript">
+    <title>Midnight Commander - skin editor</title>
+
+    <link rel="stylesheet" href="css/ui.tabs.css" type="text/css" media="print, projection, screen">
+    <link rel="stylesheet" href="css/common.css" type="text/css" media="print, projection, screen">
+
+    <script src="js/jquery-1.2.6.js" type="text/javascript"></script>
+    <script src="js/ui.core.js" type="text/javascript"></script>
+    <script src="js/ui.tabs.js" type="text/javascript"></script>
+    <script src="js/mc-css-generator.js" type="text/javascript"></script>
+    <script src="js/mc-tpl.js" type="text/javascript"></script>
+    <script src="js/mc-templates.js" type="text/javascript"></script>
+    <script src="js/mc-utils.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+
+        const config = new GeneratorConfig();
+        config.debug = true;
+
+        const generator = new CssGenerator(config);
+
+
+        $(function () {
+            $('.tab-container > ul').tabs();
+
+            // apply
+            $('#btn-apply').click(function () {
+
+                // content of ini file
+                const ini = $('#ini').val();
+                const parsedIni = McUtils.parseINIString(ini);
+
+                // generate html
+                const tpl = new McTpl();
+
+                $("#fragment-skin-1").html(tpl.render(templates.skin_view_panel_full, parsedIni));
+                $("#fragment-skin-2").html(tpl.render(templates.skin_view_panel_brief, parsedIni));
+                $("#fragment-skin-3").html(tpl.render(templates.skin_view_panel_long, parsedIni));
+                $("#fragment-skin-4").html(tpl.render(templates.skin_view_editor, parsedIni));
+                $("#fragment-skin-5").html(tpl.render(templates.skin_view_viewer, parsedIni));
+                $("#fragment-skin-6").html(tpl.render(templates.skin_view_diffviewer, parsedIni));
+
+
+                // generate css
+                const css = generator.generate(parsedIni);
+                $('#generated-style').html(css);
+
+            });
+
+            // on change skin
+            $("select#skins").change(function () {
+                $.get('skins/' + $(this).val(), function (data) {
+                    $('#ini').val(data);
+                    $('#btn-apply').click();
+                });
+            });
+
+
+            $("select#skins").change();
+        });
+
+    </script>
+
+    <style type="text/css" id="generated-style">
+
+    </style>
+</head>
+<body style="display: flex">
+
+<div class="skin-container" style="flex-grow: 0; margin: 20px">
+    <div class="skin-title">Midnight Commander Skin editor</div>
+    <div class="skin-description"><i>see what are you doing!</i></div>
+
+    <div class="tab-container" id="tab-container-skin">
+        <ul>
+            <li><a href="#fragment-skin-1"><span>Panel - full</span></a></li>
+            <li><a href="#fragment-skin-2"><span>Panel - brief</span></a></li>
+            <li><a href="#fragment-skin-3"><span>Panel - long</span></a></li>
+            <li><a href="#fragment-skin-4"><span>Editor</span></a></li>
+            <li><a href="#fragment-skin-5"><span>Viewer</span></a></li>
+            <li><a href="#fragment-skin-6"><span>Diff viewer</span></a></li>
+        </ul>
+        <div class="skin-view-container" id="fragment-skin-1"></div>
+        <div class="skin-view-container" id="fragment-skin-2"></div>
+        <div class="skin-view-container" id="fragment-skin-3"></div>
+        <div class="skin-view-container" id="fragment-skin-4"></div>
+        <div class="skin-view-container" id="fragment-skin-5"></div>
+        <div class="skin-view-container" id="fragment-skin-6"></div>
+    </div>
+</div>
+
+<div style="flex-grow: 1">
+    <h3>Skin</h3>
+    <select id="skins">
+        <option>dark.ini</option>
+        <option>darkfar.ini</option>
+        <option>default.ini</option>
+        <option>double-lines.ini</option>
+        <option>featured.ini</option>
+        <option>gotar.ini</option>
+        <option>gray-green-purple256.ini</option>
+        <option>gray-orange-blue256.ini</option>
+        <option>mc46.ini</option>
+        <option>modarcon16-defbg-thin.ini</option>
+        <option>modarcon16-defbg.ini</option>
+        <option>modarcon16-thin.ini</option>
+        <option>modarcon16.ini</option>
+        <option>modarcon16root-defbg-thin.ini</option>
+        <option>modarcon16root-defbg.ini</option>
+        <option>modarcon16root-thin.ini</option>
+        <option>modarcon16root.ini</option>
+        <option>modarin256-defbg-thin.ini</option>
+        <option>modarin256-defbg.ini</option>
+        <option>modarin256-thin.ini</option>
+        <option>modarin256.ini</option>
+        <option>modarin256root-defbg-thin.ini</option>
+        <option>modarin256root-defbg.ini</option>
+        <option>modarin256root-thin.ini</option>
+        <option>modarin256root.ini</option>
+        <option>nicedark.ini</option>
+        <option>sand256.ini</option>
+        <option>xoria256.ini</option>
+        <option>yadt256-defbg.ini</option>
+        <option>yadt256.ini</option>
+    </select>
+    <textarea rows="40" id="ini" style="width: 100%"></textarea>
+    <button id="btn-apply">Apply</button>
+</div>
+
+</body>
+</html>
