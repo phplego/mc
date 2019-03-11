@@ -42,11 +42,11 @@ class McStyleEntry{
         if(parts.length > 2)
         {
             const style = parts[2];
-            if(style.toLowerCase() === "bold")
+            if(style.toLowerCase().indexOf("bold") !== -1)
                 entry.bold = true;
-            if(style.toLowerCase() === "italic")
+            if(style.toLowerCase().indexOf("italic") !== -1)
                 entry.italic = true;
-            if(style.toLowerCase() === "underline")
+            if(style.toLowerCase().indexOf("underline") !== -1)
                 entry.underline = true;
         }
 
@@ -145,13 +145,13 @@ class CssGenerator
             css += 'background-color: ' + McUtils.parseMcColor(entry.colorBg) + ';' + "\n";
         }
         if(entry.bold){
-            css += 'font-weight: bold' + "\n";
+            css += 'font-weight: bold;' + "\n";
         }
         if(entry.italic){
-            css += 'font-style: italic' + "\n";
+            css += 'font-style: italic;' + "\n";
         }
         if(entry.underline){
-            css += 'text-decoration: underline' + "\n";
+            css += 'text-decoration: underline;' + "\n";
         }
         return css;
     }
