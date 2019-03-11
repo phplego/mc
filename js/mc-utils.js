@@ -60,4 +60,17 @@ class McUtils {
             return McConst.colors['color' + (232 + parseInt(number))];
         }
     }
+
+
+    static web2rgb(webColor)
+    {
+        const int = parseInt(webColor.substring(1), 16);
+        const r = int >> 16 & 0xFF;
+        const g = int >> 8 & 0xFF;
+        const b = int & 0xFF;
+        const rr = Math.round(r * 5 / 255);
+        const gg = Math.round(g * 5 / 255);
+        const bb = Math.round(b * 5 / 255);
+        return `rgb${rr}${gg}${bb}`;
+    }
 }
