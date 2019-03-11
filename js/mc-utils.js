@@ -38,15 +38,18 @@ class McUtils {
 
 
     /**
-     * convert colors from rgbXXX, grayXX and dictionary color names to web #XXXXXX format
-     * @param mcColor
-     * @return {*}
+     * Convert colors from rgbXXX, grayXX and dictionary color names to web #XXXXXX format
+     *
+     * @param {string} mcColor
+     * @return {string}
      */
     static parseMcColor(mcColor)
     {
+        // named and colorXXX colors
         if(mcColor in McConst.colors)
             return McConst.colors[mcColor];
 
+        // rgbXXX format
         if(mcColor.toLowerCase().startsWith('rgb')){
             // $r = str_pad(dechex(round(255 * $key{3} / 5)), 2, STR_PAD_LEFT);
             const r = Math.round(255 * mcColor[3] / 5).toString(16).padStart(2, '0');
@@ -55,13 +58,24 @@ class McUtils {
             return '#' + r + g + b;
         }
 
+        // grayXX format
         if(mcColor.toLowerCase().startsWith('gray')){
             const number = mcColor.substring(4);
             return McConst.colors['color' + (232 + parseInt(number))];
         }
+
+        // #XXXXXX format (for true color skins)
+        if(mcColor.startsWith('#')){
+            return mcColor;
+        }
     }
 
-
+    /**
+     * Convert web color to rgbXXX format
+     *
+     * @param {string} webColor Color in #XXXXXX format
+     * @return {string}
+     */
     static web2rgb(webColor)
     {
         const int = parseInt(webColor.substring(1), 16);
