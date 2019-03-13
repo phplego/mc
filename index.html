@@ -17,7 +17,7 @@
     <script src="js/mc-css-generator.js?5" type="text/javascript"></script>
     <script src="js/mc-tpl.js" type="text/javascript"></script>
     <script src="js/mc-templates.js" type="text/javascript"></script>
-    <script src="js/mc-utils.js?5" type="text/javascript"></script>
+    <script src="js/mc-utils.js?6" type="text/javascript"></script>
     <script src="js/cmp-colors.js?5" type="text/javascript"></script>
 
     <script type="text/javascript">
@@ -48,6 +48,14 @@
                 const css = generator.generate(parsedIni);
                 $('#generated-style').html(css);
 
+            });
+
+            // downlaod
+            $('#btn-download').click(function () {
+                let filename = '';
+                if (filename = prompt('Enter filename', $('#skins').val())) {
+                    McUtils.download(filename, $('#ini').val());
+                }
             });
 
             // on change skin
@@ -161,6 +169,10 @@
         </optgroup>
     </select>
     <textarea rows="40" id="ini" style="width: 100%"></textarea>
+    <div style="float: right;">
+        <br>
+        <a id="btn-download" href="javascript:" style="text-decoration: none">⇩ download</a>
+    </div>
     <button id="btn-apply" class="mt-2">Apply</button> <span class="pale">(Ctrl + Enter)</span>
 
 </div>

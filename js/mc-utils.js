@@ -87,4 +87,25 @@ class McUtils {
         const bb = Math.round(b * 5 / 255);
         return `rgb${rr}${gg}${bb}`;
     }
+
+
+    /**
+     * Download string as file
+     *
+     * @param {string} filename Desired file name
+     * @param {string} content Content of the file
+     */
+    static download(filename, content)
+    {
+        let element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(content));
+        element.setAttribute('download', filename);
+
+        element.style.display = 'none';
+        document.body.appendChild(element);
+
+        element.click();
+
+        document.body.removeChild(element);
+    }
 }
