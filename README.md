@@ -1,6 +1,6 @@
 # Midnight Commander Skin Editor
 
-This small app is a pure JS port of existing [PHP parser](https://midnight-commander.org/nopaste/skin_parser/) for Midnight Commander skins.
+This small app is a pure JS port of an existing [PHP parser](https://midnight-commander.org/nopaste/skin_parser/) for Midnight Commander skins.
 
 Run application: https://phplego.github.io/mc/
 
