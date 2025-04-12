@@ -71,7 +71,7 @@ class CssGenerator
 
     generate(parsedIni)
     {
-        const skipSections = ['skin', 'Lines', 'widget-common', 'widget-panel', 'widget-scollbar', 'widget-editor'];
+        const skipSections = ['skin', 'Lines', 'widget-panel', 'widget-scrollbar', 'widget-editor'];
         let resultCss = '';
 
         for(const sectionName in parsedIni)
