@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="Content-Style-Type" content="text/css">
     <meta http-equiv="Content-Script-Type" content="text/javascript">
-    <title>Midnight Commander - skin editor</title>
+    <title>Midnight Commander - Skin Editor</title>
 
     <link rel="stylesheet" href="css/ui.tabs.css?3" type="text/css" media="print, projection, screen">
     <link rel="stylesheet" href="css/common.css?5" type="text/css" media="print, projection, screen">
@@ -21,7 +21,6 @@
     <script src="js/cmp-colors.js?5" type="text/javascript"></script>
 
     <script type="text/javascript">
-
         $(function () {
             $('.tab-container > ul').tabs();
 
@@ -50,7 +49,7 @@
 
             });
 
-            // downlaod
+            // download
             $('#btn-download').click(function () {
                 let filename = '';
                 if (filename = prompt('Enter filename', $('#skins').val())) {
@@ -86,7 +85,7 @@
 
     </style>
 </head>
-<body style="display: flex">
+<body>
 
 <div class="skin-container" style="flex-grow: 0; margin: 20px;">
     <div class="skin-title">Midnight Commander Skin Editor</div>
@@ -94,9 +93,9 @@
 
     <div class="tab-container" id="tab-container-skin">
         <ul>
-            <li><a href="#fragment-skin-1"><span>Panel - full</span></a></li>
-            <li><a href="#fragment-skin-2"><span>Panel - brief</span></a></li>
-            <li><a href="#fragment-skin-3"><span>Panel - long</span></a></li>
+            <li><a href="#fragment-skin-1"><span>Panel - Full</span></a></li>
+            <li><a href="#fragment-skin-2"><span>Panel - Brief</span></a></li>
+            <li><a href="#fragment-skin-3"><span>Panel - Long</span></a></li>
             <li><a href="#fragment-skin-4"><span>Editor</span></a></li>
             <li><a href="#fragment-skin-5"><span>Viewer</span></a></li>
             <li><a href="#fragment-skin-6"><span>Diff viewer</span></a></li>
@@ -182,8 +181,10 @@
 
 </div>
 
-<a href="https://github.com/phplego/mc"  style="position:absolute;top:0;right:0;">
+<p>
+<a href="https://github.com/MidnightCommander/skins"  style="position:absolute;top:0;right:0;">
     <img src="forkme.svg" alt="Fork me on GitHub"></a>
+</p>
 
 </body>
 </html>
