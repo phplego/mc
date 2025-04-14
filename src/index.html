@@ -77,6 +77,16 @@
 
             // Insert ColorsComponent
             $('.cmp-colors').html(new ColorsComponent().render());
+
+            $.get('skins.json?REV_SE-REV_MC', {}, function (data) {
+                $.each(data, function (key, value) {
+                    const group = $('<optgroup label="' + key + '" />');
+                    $.each(value, function (index, item) {
+                        group.append($('<option />').html(item));
+                    });
+                    $('#skins').append(group);
+                });
+            }, 'json');
         });
 
     </script>
@@ -127,51 +137,6 @@
     <select id="skins" class="mb-2">
         <optgroup label="User Skins">
             <option>electricblue256.ini</option>
-        </optgroup>
-        <optgroup label="[std] True Color">
-            <option>seasons-spring16M.ini</option>
-            <option>seasons-autumn16M.ini</option>
-            <option>seasons-summer16M.ini</option>
-            <option>seasons-winter16M.ini</option>
-        </optgroup>
-        <optgroup label="[std] 256 Colors">
-            <option>gray-green-purple256.ini</option>
-            <option>gray-orange-blue256.ini</option>
-            <option>julia256.ini</option>
-            <option>julia256root.ini</option>
-            <option>modarin256-defbg-thin.ini</option>
-            <option>modarin256-defbg.ini</option>
-            <option>modarin256-thin.ini</option>
-            <option>modarin256.ini</option>
-            <option>modarin256root-defbg-thin.ini</option>
-            <option>modarin256root-defbg.ini</option>
-            <option>modarin256root-thin.ini</option>
-            <option>modarin256root.ini</option>
-            <option>sand256.ini</option>
-            <option>xoria256.ini</option>
-            <option>xoria256-thin.ini</option>
-            <option>xoria256root-thin.ini</option>
-            <option>yadt256-defbg.ini</option>
-            <option>yadt256.ini</option>
-        </optgroup>
-        <optgroup label="[std] 16 Colors">
-            <option>dark.ini</option>
-            <option>darkfar.ini</option>
-            <option>default.ini</option>
-            <option>double-lines.ini</option>
-            <option>featured.ini</option>
-            <option>featured-plus.ini</option>
-            <option>gotar.ini</option>
-            <option>mc46.ini</option>
-            <option>modarcon16-defbg-thin.ini</option>
-            <option>modarcon16-defbg.ini</option>
-            <option>modarcon16-thin.ini</option>
-            <option>modarcon16.ini</option>
-            <option>modarcon16root-defbg-thin.ini</option>
-            <option>modarcon16root-defbg.ini</option>
-            <option>modarcon16root-thin.ini</option>
-            <option>modarcon16root.ini</option>
-            <option>nicedark.ini</option>
         </optgroup>
     </select>
     <textarea rows="40" id="ini" style="width: 100%"></textarea>
