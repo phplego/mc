@@ -32,4 +32,7 @@ for skin_path in Path(sys.argv[1]).glob("*.ini"):
     else:
         result[Colors.B4].append(skin_path.name)
 
+for key, value in result.items():
+    result[key] = sorted(value)
+
 Path("skins.json").write_text(json.dumps(result, indent=2))
