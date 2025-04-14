@@ -6,19 +6,19 @@
     <meta http-equiv="Content-Script-Type" content="text/javascript">
     <title>Midnight Commander - Skin Editor</title>
 
-    <link rel="stylesheet" href="css/ui.tabs.css?3" type="text/css" media="print, projection, screen">
-    <link rel="stylesheet" href="css/common.css?5" type="text/css" media="print, projection, screen">
+    <link rel="stylesheet" href="css/ui.tabs.css?REV_SE-REV_MC" type="text/css" media="print, projection, screen">
+    <link rel="stylesheet" href="css/common.css?REV_SE-REV_MC" type="text/css" media="print, projection, screen">
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
 
     <script src="js/jquery-1.2.6.js" type="text/javascript"></script>
-    <script src="js/ui.core.js" type="text/javascript"></script>
-    <script src="js/ui.tabs.js" type="text/javascript"></script>
-    <script src="js/mc-const.js" type="text/javascript"></script>
-    <script src="js/mc-css-generator.js?5" type="text/javascript"></script>
-    <script src="js/mc-tpl.js" type="text/javascript"></script>
-    <script src="js/mc-templates.js" type="text/javascript"></script>
-    <script src="js/mc-utils.js?6" type="text/javascript"></script>
-    <script src="js/cmp-colors.js?5" type="text/javascript"></script>
+    <script src="js/ui.core.js?REV_SE-REV_MC" type="text/javascript"></script>
+    <script src="js/ui.tabs.js?REV_SE-REV_MC" type="text/javascript"></script>
+    <script src="js/mc-const.js?REV_SE-REV_MC" type="text/javascript"></script>
+    <script src="js/mc-css-generator.js?REV_SE-REV_MC" type="text/javascript"></script>
+    <script src="js/mc-tpl.js?REV_SE-REV_MC" type="text/javascript"></script>
+    <script src="js/mc-templates.js?REV_SE-REV_MC" type="text/javascript"></script>
+    <script src="js/mc-utils.js?REV_SE-REV_MC" type="text/javascript"></script>
+    <script src="js/cmp-colors.js?REV_SE-REV_MC" type="text/javascript"></script>
 
     <script type="text/javascript">
         $(function () {
@@ -59,7 +59,7 @@
 
             // on change skin
             $("select#skins").change(function () {
-                $.get('skins/' + $(this).val(), function (data) {
+                $.get('skins/' + $(this).val() + '?REV_SE-REV_MC', function (data) {
                     $('#ini').val(data);
                     $('#btn-apply').click();
                 });
@@ -77,6 +77,16 @@
 
             // Insert ColorsComponent
             $('.cmp-colors').html(new ColorsComponent().render());
+
+            $.get('skins.json?REV_SE-REV_MC', {}, function (data) {
+                $.each(data, function (key, value) {
+                    const group = $('<optgroup label="' + key + '" />');
+                    $.each(value, function (index, item) {
+                        group.append($('<option />').html(item));
+                    });
+                    $('#skins').append(group);
+                });
+            }, 'json');
         });
 
     </script>
@@ -86,6 +96,8 @@
     </style>
 </head>
 <body>
+
+<div id="flex-container" style="display: flex">
 
 <div class="skin-container" style="flex-grow: 0; margin: 20px;">
     <div class="skin-title">Midnight Commander Skin Editor</div>
@@ -126,51 +138,6 @@
         <optgroup label="User Skins">
             <option>electricblue256.ini</option>
         </optgroup>
-        <optgroup label="[std] True Color">
-            <option>seasons-spring16M.ini</option>
-            <option>seasons-autumn16M.ini</option>
-            <option>seasons-summer16M.ini</option>
-            <option>seasons-winter16M.ini</option>
-        </optgroup>
-        <optgroup label="[std] 256 Colors">
-            <option>gray-green-purple256.ini</option>
-            <option>gray-orange-blue256.ini</option>
-            <option>julia256.ini</option>
-            <option>julia256root.ini</option>
-            <option>modarin256-defbg-thin.ini</option>
-            <option>modarin256-defbg.ini</option>
-            <option>modarin256-thin.ini</option>
-            <option>modarin256.ini</option>
-            <option>modarin256root-defbg-thin.ini</option>
-            <option>modarin256root-defbg.ini</option>
-            <option>modarin256root-thin.ini</option>
-            <option>modarin256root.ini</option>
-            <option>sand256.ini</option>
-            <option>xoria256.ini</option>
-            <option>xoria256-thin.ini</option>
-            <option>xoria256root-thin.ini</option>
-            <option>yadt256-defbg.ini</option>
-            <option>yadt256.ini</option>
-        </optgroup>
-        <optgroup label="[std] 16 Colors">
-            <option>dark.ini</option>
-            <option>darkfar.ini</option>
-            <option>default.ini</option>
-            <option>double-lines.ini</option>
-            <option>featured.ini</option>
-            <option>featured-plus.ini</option>
-            <option>gotar.ini</option>
-            <option>mc46.ini</option>
-            <option>modarcon16-defbg-thin.ini</option>
-            <option>modarcon16-defbg.ini</option>
-            <option>modarcon16-thin.ini</option>
-            <option>modarcon16.ini</option>
-            <option>modarcon16root-defbg-thin.ini</option>
-            <option>modarcon16root-defbg.ini</option>
-            <option>modarcon16root-thin.ini</option>
-            <option>modarcon16root.ini</option>
-            <option>nicedark.ini</option>
-        </optgroup>
     </select>
     <textarea rows="40" id="ini" style="width: 100%"></textarea>
     <div style="float: right;">
@@ -181,10 +148,14 @@
 
 </div>
 
-<p>
-<a href="https://github.com/MidnightCommander/skins"  style="position:absolute;top:0;right:0;">
-    <img src="forkme.svg" alt="Fork me on GitHub"></a>
-</p>
+</div>
+
+<div>
+    <a href="https://github.com/MidnightCommander/skins"  style="position:absolute;top:0;right:0;">
+        <img src="forkme.svg" alt="Fork me on GitHub"></a>
+</div>
+
+<div>Skin Editor revision: REV_SE; mc revision: REV_MC</div>
 
 </body>
 </html>

@@ -28,9 +28,27 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: MidnightCommander/mc
+          path: mc
+
+      - run: |
+          cp -r src dist
+
+          REV_SE=$(git rev-parse --short HEAD)
+          REV_MC=$(cd mc; git rev-parse --short HEAD)
+
+          cp mc/misc/skins/*.ini dist/skins/
+          python3 generate-skin-list.py
+          mv skins.json dist/
+
+          sed -i 's/REV_SE/$REV_SE/g' dist/index.html
+          sed -i 's/REV_MC/$REV_MC/g' dist/index.html
+
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'
+          path: 'dist'
       - uses: actions/deploy-pages@v4
         id: deployment
