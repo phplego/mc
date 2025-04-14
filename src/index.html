@@ -6,19 +6,19 @@
     <meta http-equiv="Content-Script-Type" content="text/javascript">
     <title>Midnight Commander - Skin Editor</title>
 
-    <link rel="stylesheet" href="css/ui.tabs.css?3" type="text/css" media="print, projection, screen">
-    <link rel="stylesheet" href="css/common.css?5" type="text/css" media="print, projection, screen">
+    <link rel="stylesheet" href="css/ui.tabs.css?REV_SE-REV_MC" type="text/css" media="print, projection, screen">
+    <link rel="stylesheet" href="css/common.css?REV_SE-REV_MC" type="text/css" media="print, projection, screen">
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
 
     <script src="js/jquery-1.2.6.js" type="text/javascript"></script>
-    <script src="js/ui.core.js" type="text/javascript"></script>
-    <script src="js/ui.tabs.js" type="text/javascript"></script>
-    <script src="js/mc-const.js" type="text/javascript"></script>
-    <script src="js/mc-css-generator.js?5" type="text/javascript"></script>
-    <script src="js/mc-tpl.js" type="text/javascript"></script>
-    <script src="js/mc-templates.js" type="text/javascript"></script>
-    <script src="js/mc-utils.js?6" type="text/javascript"></script>
-    <script src="js/cmp-colors.js?5" type="text/javascript"></script>
+    <script src="js/ui.core.js?REV_SE-REV_MC" type="text/javascript"></script>
+    <script src="js/ui.tabs.js?REV_SE-REV_MC" type="text/javascript"></script>
+    <script src="js/mc-const.js?REV_SE-REV_MC" type="text/javascript"></script>
+    <script src="js/mc-css-generator.js?REV_SE-REV_MC" type="text/javascript"></script>
+    <script src="js/mc-tpl.js?REV_SE-REV_MC" type="text/javascript"></script>
+    <script src="js/mc-templates.js?REV_SE-REV_MC" type="text/javascript"></script>
+    <script src="js/mc-utils.js?REV_SE-REV_MC" type="text/javascript"></script>
+    <script src="js/cmp-colors.js?REV_SE-REV_MC" type="text/javascript"></script>
 
     <script type="text/javascript">
         $(function () {
@@ -59,7 +59,7 @@
 
             // on change skin
             $("select#skins").change(function () {
-                $.get('skins/' + $(this).val(), function (data) {
+                $.get('skins/' + $(this).val() + '?REV_SE-REV_MC', function (data) {
                     $('#ini').val(data);
                     $('#btn-apply').click();
                 });
@@ -86,6 +86,8 @@
     </style>
 </head>
 <body>
+
+<div id="flex-container" style="display: flex">
 
 <div class="skin-container" style="flex-grow: 0; margin: 20px;">
     <div class="skin-title">Midnight Commander Skin Editor</div>
@@ -181,10 +183,14 @@
 
 </div>
 
-<p>
-<a href="https://github.com/MidnightCommander/skins"  style="position:absolute;top:0;right:0;">
-    <img src="forkme.svg" alt="Fork me on GitHub"></a>
-</p>
+</div>
+
+<div>
+    <a href="https://github.com/MidnightCommander/skins"  style="position:absolute;top:0;right:0;">
+        <img src="forkme.svg" alt="Fork me on GitHub"></a>
+</div>
+
+<div>Skin Editor revision: REV_SE; mc revision: REV_MC</div>
 
 </body>
 </html>
