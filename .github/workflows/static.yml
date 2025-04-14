@@ -40,7 +40,7 @@ jobs:
           REV_MC=$(cd mc; git rev-parse --short HEAD)
 
           cp mc/misc/skins/*.ini dist/skins/
-          python3 generate-skin-list.py
+          python3 generate-skin-list.py dist/skins
           mv skins.json dist/
 
           sed -i 's/REV_SE/$REV_SE/g' dist/index.html
